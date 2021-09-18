@@ -1,3 +1,7 @@
-.NavLink {
+.NavLinksContainer {
   margin-left: 100px;
+}
+
+.NavLink {
+  margin-right: 30px;
 }
