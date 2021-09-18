@@ -1,0 +1,27 @@
+.Container {
+  margin-top: 50px;
+  margin-left: 100px;
+  width: 400px;
+}
+
+.FormInput {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.PhoneBookHeader {
+  font-weight: 700;
+  font-size: 45px;
+  margin-left: 100px;
+}
+
+.HomeViewHeader {
+  font-weight: 700;
+  font-size: 45px;
+  margin-left: 100px;
+}
+
+.FormHeader {
+  font-weight: 700;
+  font-size: 45px;
+}
