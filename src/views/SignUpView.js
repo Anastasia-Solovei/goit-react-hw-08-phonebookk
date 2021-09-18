@@ -46,9 +46,9 @@ export default function SignUpView() {
             name="name"
             value={name}
             onChange={handleChange}
-            //pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            //title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-            //required
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+            required
           />
         </label>
 
@@ -59,9 +59,9 @@ export default function SignUpView() {
             name="email"
             value={email}
             onChange={handleChange}
-            // pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*"
-            //title="Email может состоять из букв, тире, цифр и не может содержать пробелы"
-            //required
+            pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*"
+            title="Email может состоять из букв, тире, цифр и не может содержать пробелы"
+            required
           />
         </label>
 
@@ -72,9 +72,9 @@ export default function SignUpView() {
             name="password"
             value={password}
             onChange={handleChange}
-            //pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            //title="Пароль может состоять из букв, тире, цифр и не может содержать пробелы"
-            // required
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Пароль может состоять из букв, тире, цифр и не может содержать пробелы"
+            required
           />
         </label>
 
