@@ -1,0 +1,9 @@
+.UserMenu {
+  display: flex;
+  align-items: center;
+  margin-left: 450px;
+}
+
+.UserMenuAvatar {
+  border-radius: 50px;
+}
