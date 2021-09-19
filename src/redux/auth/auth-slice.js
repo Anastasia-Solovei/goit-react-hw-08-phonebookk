@@ -9,6 +9,7 @@ const initialState = {
   },
   token: null,
   isLoggedIn: false,
+  error: null,
 };
 
 const authSlice = createSlice({
@@ -20,10 +21,16 @@ const authSlice = createSlice({
       state.token = action.payload.token;
       state.isLoggedIn = true;
     },
+    [authOperations.register.rejected](state, action) {
+      state.error = action.payload;
+    },
     [authOperations.login.fulfilled](state, action) {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
+    },
+    [authOperations.login.rejected](state, action) {
+      state.error = action.payload;
     },
     [authOperations.logout.fulfilled](state, _) {
       state.user = {
@@ -33,6 +40,9 @@ const authSlice = createSlice({
       };
       state.token = null;
       state.isLoggedIn = false;
+    },
+    [authOperations.logout.rejected](state, action) {
+      state.error = action.payload;
     },
   },
 });

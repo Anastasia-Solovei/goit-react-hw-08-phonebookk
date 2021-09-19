@@ -17,34 +17,43 @@ const token = {
   },
 };
 
-const register = createAsyncThunk(usersSignUpAction, async (credentials) => {
-  try {
-    const { data } = await axios.post("/users/signup", credentials);
-    console.log(data);
-    token.set(data.token);
-    return data;
-  } catch (error) {
-    console.log(error);
+const register = createAsyncThunk(
+  usersSignUpAction,
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post("/users/signup", credentials);
+      console.log(data);
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
 
-const login = createAsyncThunk(usersLoginAction, async (credentials) => {
-  try {
-    const { data } = await axios.post("/users/login", credentials);
-    token.set(data.token);
-    return data;
-  } catch (error) {
-    console.log(error);
+const login = createAsyncThunk(
+  usersLoginAction,
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post("/users/login", credentials);
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
 
-const logout = createAsyncThunk(usersLogoutAction, async () => {
-  try {
-    await axios.post("/users/logout");
-    token.unset();
-  } catch (error) {
-    console.log(error);
+const logout = createAsyncThunk(
+  usersLogoutAction,
+  async (_, { rejectWithValue }) => {
+    try {
+      await axios.post("/users/logout");
+      token.unset();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
 
 export default { register, login, logout };
