@@ -44,6 +44,13 @@ const authSlice = createSlice({
     [authOperations.logout.rejected](state, action) {
       state.error = action.payload;
     },
+    [authOperations.fetchCurrentUser.fulfilled](state, action) {
+      state.user = { ...action.payload };
+      state.isLoggedIn = true;
+    },
+    [authOperations.fetchCurrentUser.rejected](state, action) {
+      state.error = action.payload;
+    },
   },
 });
 

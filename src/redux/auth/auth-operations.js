@@ -3,6 +3,7 @@ import {
   usersSignUpAction,
   usersLoginAction,
   usersLogoutAction,
+  usersfetchCurrentUserAction,
 } from "./auth-actions";
 import axios from "axios";
 axios.defaults.baseURL = "https://connections-api.herokuapp.com";
@@ -56,4 +57,26 @@ const logout = createAsyncThunk(
   }
 );
 
-export default { register, login, logout };
+const fetchCurrentUser = createAsyncThunk(
+  usersfetchCurrentUserAction,
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+
+    if (persistedToken === null) {
+      console.log("there is no token");
+      return thunkAPI.rejectWithValue("there is no token");
+    }
+
+    token.set(persistedToken);
+    try {
+      const { data } = await axios.get("/users/current");
+      console.log(data);
+      return data;
+    } catch (error) {}
+
+    // await axios.post("/users/logout");
+  }
+);
+
+export default { register, login, logout, fetchCurrentUser };

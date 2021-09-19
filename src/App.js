@@ -1,13 +1,21 @@
-import React from 'react'
-import { Switch, Route } from 'react-router'
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-import AppBar from './components/AppBar'
-import HomeView from './views/HomeView'
-import LogInView from './views/LogInView'
-import PhoneBookView from './views/PhoneBookView'
-import SignUpView from './views/SignUpView'
+import { Switch, Route } from "react-router";
+
+import AppBar from "./components/AppBar";
+import HomeView from "./views/HomeView";
+import LogInView from "./views/LogInView";
+import PhoneBookView from "./views/PhoneBookView";
+import SignUpView from "./views/SignUpView";
+import { authOperations } from "./redux/auth";
 
 export default function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
   return (
     <>
       <AppBar />
@@ -19,5 +27,5 @@ export default function App() {
         <Route path="/contacts" component={PhoneBookView} />
       </Switch>
     </>
-  )
+  );
 }
