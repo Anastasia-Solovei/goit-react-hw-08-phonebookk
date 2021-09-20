@@ -38,13 +38,14 @@ export default function SignUpView() {
   return (
     <div className={s.Container}>
       <h2 className={s.FormHeader}>Registration page</h2>
-      <form onSubmit={handleSubmit}>
-        <label className={s.FormInput}>
+      <form onSubmit={handleSubmit} className={s.Form}>
+        <label className={s.FormInputLabel}>
           Name
           <input
             type="text"
             name="name"
             value={name}
+            className={s.FormInput}
             onChange={handleChange}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
@@ -52,12 +53,13 @@ export default function SignUpView() {
           />
         </label>
 
-        <label className={s.FormInput}>
+        <label className={s.FormInputLabel}>
           Email
           <input
             type="email"
             name="email"
             value={email}
+            className={s.FormInput}
             onChange={handleChange}
             pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*"
             title="Email может состоять из букв, тире, цифр и не может содержать пробелы"
@@ -65,12 +67,13 @@ export default function SignUpView() {
           />
         </label>
 
-        <label className={s.FormInput}>
+        <label className={s.FormInputLabel}>
           Password
           <input
             type="password"
             name="password"
             value={password}
+            className={s.FormInput}
             onChange={handleChange}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Пароль может состоять из букв, тире, цифр и не может содержать пробелы"
@@ -78,7 +81,9 @@ export default function SignUpView() {
           />
         </label>
 
-        <button type="submit">Sign Up</button>
+        <button type="submit" className={s.FormButton}>
+          Sign Up
+        </button>
       </form>
     </div>
   );
