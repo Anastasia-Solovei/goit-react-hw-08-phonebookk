@@ -7,18 +7,18 @@ import s from "./AuthNav.module.css";
 
 export default function AuthNav() {
   return (
-    <div className={s.NavLinksContainer}>
+    <div className={s.AuthNavContainer}>
       <NavLink
         to="/register"
-        className={s.NavLink}
-        activeClassName={s.activeNavLink}
+        className={s.AuthNavLink}
+        activeClassName={s.activeAuthNavLink}
       >
         Sign Up
       </NavLink>
       <NavLink
         to="/login"
-        className={s.NavLink}
-        activeClassName={s.activeNavLink}
+        className={s.AuthNavLink}
+        activeClassName={s.activeAuthNavLink}
       >
         Log In
       </NavLink>
