@@ -10,10 +10,14 @@ import s from "./AppBar.module.css";
 
 export default function AppBar() {
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
+  const isFetchingCurrentUser = useSelector(
+    authSelectors.getIsFetchingCurrentUser
+  );
+
   return (
     <header className={s.AppBar}>
       <Navigation />
-      {isLoggedIn ? <UserMenu /> : <AuthNav />}
+      {isLoggedIn || isFetchingCurrentUser ? <UserMenu /> : <AuthNav />}
     </header>
   );
 }
