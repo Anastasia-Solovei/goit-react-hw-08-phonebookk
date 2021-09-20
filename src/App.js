@@ -1,17 +1,22 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-
-import { Switch, Route } from "react-router";
-
+import { useEffect, Suspense, lazy } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Switch } from "react-router";
+import { authOperations, authSelectors } from "./redux/auth";
 import AppBar from "./components/AppBar";
-import HomeView from "./views/HomeView";
-import LogInView from "./views/LogInView";
-import PhoneBookView from "./views/PhoneBookView";
-import SignUpView from "./views/SignUpView";
-import { authOperations } from "./redux/auth";
+import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
+
+const HomeView = lazy(() => import("./views/HomeView"));
+const LogInView = lazy(() => import("./views/LogInView"));
+const PhoneBookView = lazy(() => import("./views/PhoneBookView"));
+const SignUpView = lazy(() => import("./views/SignUpView"));
 
 export default function App() {
   const dispatch = useDispatch();
+  const isFetchingCurrentUser = useSelector(
+    authSelectors.getIsFetchingCurrentUser
+  );
+  console.log("isFetchingCurrentUser: ", isFetchingCurrentUser);
 
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
@@ -20,12 +25,27 @@ export default function App() {
     <>
       <AppBar />
 
-      <Switch>
-        <Route exact path="/" component={HomeView} />
-        <Route path="/register" component={SignUpView} />
-        <Route path="/login" component={LogInView} />
-        <Route path="/contacts" component={PhoneBookView} />
-      </Switch>
+      {!isFetchingCurrentUser && (
+        <Switch>
+          <Suspense fallback={<p>Loading...</p>}>
+            <PublicRoute exact path="/">
+              <HomeView />
+            </PublicRoute>
+
+            <PublicRoute exact path="/register" restricted>
+              <SignUpView />
+            </PublicRoute>
+
+            <PublicRoute exact path="/login" redirectTo="/contacts" restricted>
+              <LogInView />
+            </PublicRoute>
+
+            <PrivateRoute path="/contacts" redirectTo="/login">
+              <PhoneBookView />
+            </PrivateRoute>
+          </Suspense>
+        </Switch>
+      )}
     </>
   );
 }
