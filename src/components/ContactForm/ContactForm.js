@@ -1,77 +1,69 @@
-import { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { v4 as uuidv4 } from 'uuid'
-import PropTypes from 'prop-types'
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+import PropTypes from "prop-types";
 
-// import { contactsOperations, contactsSelectors } from 'redux/contacts'
-import { addContact } from '../../redux/contacts/contacts-operations'
-import { getContacts } from '../../redux/contacts/contacts-selectors'
+import { addContact } from "../../redux/contacts/contacts-operations";
+import { getContacts } from "../../redux/contacts/contacts-selectors";
 
-import s from './ContactForm.module.css'
-// console.log(addContact)
+import s from "./ContactForm.module.css";
 
 export default function ContactForm() {
-  const [name, setName] = useState('')
-  const [number, setNumber] = useState('')
-  const nameInputId = uuidv4()
-  const numberInputId = uuidv4()
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
+  const nameInputId = uuidv4();
+  const numberInputId = uuidv4();
 
-  // const contacts = useSelector(contactsSelectors.getContacts)
-  const contacts = useSelector(getContacts)
-  console.log(contacts)
-  const dispatch = useDispatch()
+  const contacts = useSelector(getContacts);
+  console.log(contacts);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
     switch (name) {
-      case 'name':
-        setName(value)
-        break
+      case "name":
+        setName(value);
+        break;
 
-      case 'number':
-        setNumber(value)
-        break
+      case "number":
+        setNumber(value);
+        break;
 
       default:
-        return
+        return;
     }
-  }
+  };
 
   const checkUniqueContact = (allContasts, newName) => {
     const isExistContact = !!allContasts.find(
-      (contact) => contact.name === newName,
-    )
+      (contact) => contact.name === newName
+    );
 
-    isExistContact && alert('Contact is already exist!')
+    isExistContact && alert("Contact is already exist!");
 
-    return !isExistContact
-  }
+    return !isExistContact;
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const uniqueContact = checkUniqueContact(contacts, name)
+    const uniqueContact = checkUniqueContact(contacts, name);
     if (!uniqueContact) {
-      return
+      return;
     }
 
     uniqueContact &&
       dispatch(
-        // contactsOperations.addContact({
-        //   id: uuidv4(),
-        //   name: name,
-        //   number: number,
-        // }),
         addContact({
           id: uuidv4(),
           name: name,
           number: number,
-        }),
-      )
-    setName('')
-    setNumber('')
-  }
+        })
+      );
+    setName("");
+    setNumber("");
+  };
 
   return (
     <form className={s.ContactForm} onSubmit={handleSubmit}>
@@ -113,10 +105,10 @@ export default function ContactForm() {
         Add contact
       </button>
     </form>
-  )
+  );
 }
 
 ContactForm.propTypes = {
   onAddContact: PropTypes.func,
   checkUniqueContact: PropTypes.func,
-}
+};

@@ -7,7 +7,6 @@ import {
 } from "./auth-actions";
 import axios from "axios";
 axios.defaults.baseURL = "https://connections-api.herokuapp.com";
-console.log(axios.defaults);
 
 const token = {
   set(token) {
@@ -23,8 +22,8 @@ const register = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post("/users/signup", credentials);
-      console.log(data);
       token.set(data.token);
+
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -38,6 +37,7 @@ const login = createAsyncThunk(
     try {
       const { data } = await axios.post("/users/login", credentials);
       token.set(data.token);
+
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -70,11 +70,8 @@ const fetchCurrentUser = createAsyncThunk(
     token.set(persistedToken);
     try {
       const { data } = await axios.get("/users/current");
-      console.log(data);
       return data;
     } catch (error) {}
-
-    // await axios.post("/users/logout");
   }
 );
 
