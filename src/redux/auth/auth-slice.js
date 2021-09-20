@@ -9,6 +9,7 @@ const initialState = {
   },
   token: null,
   isLoggedIn: false,
+  isFetchingCurrentUser: false,
   error: null,
 };
 
@@ -44,11 +45,16 @@ const authSlice = createSlice({
     [authOperations.logout.rejected](state, action) {
       state.error = action.payload;
     },
+    [authOperations.fetchCurrentUser.pending](state, action) {
+      state.isFetchingCurrentUser = true;
+    },
     [authOperations.fetchCurrentUser.fulfilled](state, action) {
       state.user = { ...action.payload };
       state.isLoggedIn = true;
+      state.isFetchingCurrentUser = false;
     },
     [authOperations.fetchCurrentUser.rejected](state, action) {
+      state.isFetchingCurrentUser = false;
       state.error = action.payload;
     },
   },
