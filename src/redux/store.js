@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit'
-import storage from 'redux-persist/lib/storage'
+import { configureStore } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
 import {
   persistStore,
   persistReducer,
@@ -9,17 +9,16 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist'
+} from "redux-persist";
 // import logger from "redux-logger";
-import contactsReducer from './contacts/contacts-reducer'
-import authReducer from './auth/auth-slice'
-console.log(contactsReducer)
+import contactsReducer from "./contacts/contacts-reducer";
+import authReducer from "./auth/auth-slice";
 
 const authPersistConfig = {
-  key: 'auth',
+  key: "auth",
   storage,
-  whitelist: ['token'],
-}
+  whitelist: ["token"],
+};
 
 export const store = configureStore({
   reducer: {
@@ -34,7 +33,7 @@ export const store = configureStore({
       },
     }),
 
-  devTools: process.env.NODE_ENV === 'development',
-})
+  devTools: process.env.NODE_ENV === "development",
+});
 
-export const persistor = persistStore(store)
+export const persistor = persistStore(store);

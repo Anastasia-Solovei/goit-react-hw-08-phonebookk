@@ -5,14 +5,12 @@ import {
   deleteContactAction,
 } from "./contacts-actions";
 import axios from "axios";
-console.dir(axios);
 
 export const fetchContacts = createAsyncThunk(
   fetchContactsAction,
   async (_, { rejectWithValue }) => {
     try {
       const contacts = await axios.get("/contacts");
-      console.log(contacts);
       return contacts.data;
     } catch (error) {
       return rejectWithValue(error);

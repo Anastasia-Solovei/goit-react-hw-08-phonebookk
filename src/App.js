@@ -16,7 +16,6 @@ export default function App() {
   const isFetchingCurrentUser = useSelector(
     authSelectors.getIsFetchingCurrentUser
   );
-  console.log("isFetchingCurrentUser: ", isFetchingCurrentUser);
 
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
