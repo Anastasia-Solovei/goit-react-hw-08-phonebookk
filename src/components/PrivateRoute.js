@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router";
 import { authSelectors } from "redux/auth";
+import paths from "paths";
 
 export default function PrivateRoute({
   children,

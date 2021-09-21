@@ -5,6 +5,7 @@ import { authOperations, authSelectors } from "./redux/auth";
 import AppBar from "./components/AppBar";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
+import paths from "paths";
 
 const HomeView = lazy(() => import("./views/HomeView"));
 const LogInView = lazy(() => import("./views/LogInView"));
@@ -27,19 +28,24 @@ export default function App() {
       {!isFetchingCurrentUser && (
         <Switch>
           <Suspense fallback={<p>Loading...</p>}>
-            <PublicRoute exact path="/">
+            <PublicRoute exact path={paths.home}>
               <HomeView />
             </PublicRoute>
 
-            <PublicRoute exact path="/register" restricted>
+            <PublicRoute exact path={paths.register} restricted>
               <SignUpView />
             </PublicRoute>
 
-            <PublicRoute exact path="/login" redirectTo="/contacts" restricted>
+            <PublicRoute
+              exact
+              path={paths.login}
+              redirectTo={paths.contacts}
+              restricted
+            >
               <LogInView />
             </PublicRoute>
 
-            <PrivateRoute path="/contacts" redirectTo="/login">
+            <PrivateRoute path={paths.contacts} redirectTo={paths.login}>
               <PhoneBookView />
             </PrivateRoute>
           </Suspense>

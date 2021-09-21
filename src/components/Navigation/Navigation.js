@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { authSelectors } from "redux/auth";
+import paths from "paths";
 
 import s from "./Navigation.module.css";
 
@@ -11,7 +12,7 @@ export default function Navigation() {
     <nav className={s.NavLinksContainer}>
       <NavLink
         exact
-        to="/"
+        to={paths.home}
         className={s.NavLink}
         activeClassName={s.activeNavLink}
       >
@@ -20,7 +21,7 @@ export default function Navigation() {
 
       {isLoggedIn && (
         <NavLink
-          to="/contacts"
+          to={paths.contacts}
           className={s.NavLink}
           activeClassName={s.activeNavLink}
         >
