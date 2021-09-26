@@ -11,7 +11,7 @@ export default function Filter() {
   const filterValue = useSelector(contactsSelectors.getFilter);
   const dispatch = useDispatch();
   const onChangeFilter = (e) =>
-    dispatch(contactsActions.changeFilter(e.target.value));
+    dispatch(contactsActions.changeFilterAction(e.target.value));
 
   return (
     <div className={s.FilterOverlay}>
