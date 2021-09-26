@@ -6,11 +6,13 @@ import {
 } from "./contacts-actions";
 import axios from "axios";
 
+const url = "/contacts";
+
 export const fetchContacts = createAsyncThunk(
   fetchContactsAction,
   async (_, { rejectWithValue }) => {
     try {
-      const contacts = await axios.get("/contacts");
+      const contacts = await axios.get(url);
       return contacts.data;
     } catch (error) {
       return rejectWithValue(error);
@@ -19,14 +21,14 @@ export const fetchContacts = createAsyncThunk(
 );
 
 export const addContact = createAsyncThunk(addContactAction, async (item) => {
-  const contact = await axios.post("/contacts", item);
+  const contact = await axios.post(url, item);
   return contact.data;
 });
 
 export const deleteContact = createAsyncThunk(
   deleteContactAction,
   async (contactId) => {
-    await axios.delete(`/contacts/${contactId}`);
+    await axios.delete(`${url}/${contactId}`);
     return contactId;
   }
 );
